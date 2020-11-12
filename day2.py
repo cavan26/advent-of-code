@@ -1,42 +1,53 @@
 class IntcodeMachine:
     def __init__(self, file: str):
         self.position = 0
-        self.intcode_list = []
+        self.intcode_list = {}
         self.load_intcode(file)
         self.input = []
         self.output = []
         self.is_stopped = False
+        self.relative_base_offset = 0
 
     def load_intcode(self, file):
         my_file = open(file, "r")
-        self.intcode_list = list(map(int, my_file.read().split(",")))
+        elements = my_file.read().split(",")
         my_file.close()
+        for i in range(len(elements)):
+            self.intcode_list[i] = int(elements[i])
 
-    def set_intcode(self, pos: int, value: int):
-        if len(self.intcode_list) <= pos:
-            raise Exception("The intcode list is too short...")
-        self.intcode_list[pos] = value
+    def set_intcode(self, pos: int, value: int, mode: int):
+        if mode == 2:
+            self.intcode_list[pos + self.relative_base_offset] = value
+        else:
+            self.intcode_list[pos] = value
+
+    def get(self, pos):
+        if pos in self.intcode_list:
+            return self.intcode_list[pos]
+        return 0
 
     def get_incode(self, pos: int, mode: int):
-        if len(self.intcode_list) < pos:
-            raise Exception("The intcode list is too short...")
         if mode == 0:  # position mode
-            return self.intcode_list[self.intcode_list[pos]]
+            return self.get(self.get(pos))
         elif mode == 1:  # immediate mode
-            return self.intcode_list[pos]
+            return self.get(pos)
+        elif mode == 2:  # relative mode
+            return self.get(self.get(pos) + self.relative_base_offset)
 
     def instruction_1(self, code):
         self.set_intcode(self.get_incode(self.position + 3, 1),
-                         self.get_incode(self.position + 1, code[1]) + self.get_incode(self.position + 2, code[2]))
+                         self.get_incode(self.position + 1, code[1]) + self.get_incode(self.position + 2, code[2]),
+                         code[3])
         self.position += 4
 
     def instruction_2(self, code):
         self.set_intcode(self.get_incode(self.position + 3, 1),
-                         self.get_incode(self.position + 1, code[1]) * self.get_incode(self.position + 2, code[2]))
+                         self.get_incode(self.position + 1, code[1]) * self.get_incode(self.position + 2, code[2]),
+                         code[3])
         self.position += 4
 
-    def instruction_3(self):
-        self.set_intcode(self.get_incode(self.position + 1, 1), self.input[0])
+    def instruction_3(self, code):
+        self.set_intcode(self.get_incode(self.position + 1, 1), self.input[0], code[1])
         self.input.pop(0)
         self.position += 2
 
@@ -59,17 +70,21 @@ class IntcodeMachine:
 
     def instruction_7(self, code):
         if self.get_incode(self.position + 1, code[1]) < self.get_incode(self.position + 2, code[2]):
-            self.set_intcode(self.get_incode(self.position + 3, 1), 1)
+            self.set_intcode(self.get_incode(self.position + 3, 1), 1, code[3])
         else:
-            self.set_intcode(self.get_incode(self.position + 3, 1), 0)
+            self.set_intcode(self.get_incode(self.position + 3, 1), 0, code[3])
         self.position += 4
 
     def instruction_8(self, code):
         if self.get_incode(self.position + 1, code[1]) == self.get_incode(self.position + 2, code[2]):
-            self.set_intcode(self.get_incode(self.position + 3, 1), 1)
+            self.set_intcode(self.get_incode(self.position + 3, 1), 1, code[3])
         else:
-            self.set_intcode(self.get_incode(self.position + 3, 1), 0)
+            self.set_intcode(self.get_incode(self.position + 3, 1), 0, code[3])
         self.position += 4
+
+    def instruction_9(self, code):
+        self.relative_base_offset += self.get_incode(self.position + 1, code[1])
+        self.position += 2
 
     @staticmethod
     def get_instructions(code: int):
@@ -91,7 +106,7 @@ class IntcodeMachine:
                     output = self.output
                     self.output = []
                     return output
-                self.instruction_3()
+                self.instruction_3(code)
             elif code[0] == 4:
                 self.output.append(self.instruction_4(code))
             elif code[0] == 5:
@@ -102,6 +117,8 @@ class IntcodeMachine:
                 self.instruction_7(code)
             elif code[0] == 8:
                 self.instruction_8(code)
+            elif code[0] == 9:
+                self.instruction_9(code)
             elif code[0] == 99:
                 self.is_stopped = True
 
