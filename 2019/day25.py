@@ -2,7 +2,7 @@ from day2 import IntcodeMachine
 
 class Droid:
     def __init__(self):
-        self.intcode_machine = IntcodeMachine("data/day25.txt")
+        self.intcode_machine = IntcodeMachine("data/2019/day25.txt")
 
     def move(self):
         while True:

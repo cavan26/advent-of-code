@@ -70,6 +70,6 @@ class FFT:
 
 
 if __name__ == "__main__":
-    fft = FFT("data/day16.txt")
+    fft = FFT("../data/2019/day16.txt")
     print(f"Part 1: {fft.run_phases_part_1(100)}")
     print(f"Part 2: {fft.run_phases_part_2(100)}")

@@ -2,7 +2,7 @@ from day2 import IntcodeMachine
 
 class Network:
     def __init__(self):
-        self.computers = [IntcodeMachine("data/day23.txt") for i in range(50)]
+        self.computers = [IntcodeMachine("data/2019/day23.txt") for i in range(50)]
         self.queues = {}
         self.nat = []
         self.Y = None

@@ -5,7 +5,7 @@ import sys
 
 class GameArcade:
     def __init__(self):
-        self.machine = IntcodeMachine("data/day13.txt")
+        self.machine = IntcodeMachine("data/2019/day13.txt")
         self.tiles = {}
         self.max_X = 0
         self.max_Y = 0

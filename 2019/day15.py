@@ -6,7 +6,7 @@ import time
 
 class Droid:
     def __init__(self):
-        self.machine = IntcodeMachine("data/day15.txt")
+        self.machine = IntcodeMachine("data/2019/day15.txt")
         self.map = {}
         self.coord = (0, 0)
 

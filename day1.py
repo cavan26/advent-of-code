@@ -1,29 +1,22 @@
-import math
 
+class CoinCollector():
+    def __init__(self, file):
+        self.list_ints = []
+        self.read_file(file)
+        self.solve()
 
-def fuel_required(mass: int) -> int:
-    fuel = math.floor(mass/3) - 2
-    if fuel < 0:
-        return 0
-    return fuel
+    def read_file(self, file):
+        file1 = open(file, 'r')
+        for line in file1.readlines():
+            self.list_ints.append(int(line.strip('\n')))
 
-
-def fuel_required_extended(mass: int) -> int:
-    total_fuel = 0
-    fuel = fuel_required(mass)
-    while fuel != 0:
-        total_fuel += fuel
-        fuel = fuel_required(fuel)
-    return total_fuel
-
-
-def fuel_required_modules() -> int:
-    sum_fuel = 0
-    f = open("2019-day1/input.txt", "r")
-    for module in f:
-        sum_fuel += fuel_required_extended(int(module))
-    return sum_fuel
-
+    def solve(self):
+        for i in range(len(self.list_ints)):
+            for j in range(i+1, len(self.list_ints)):
+                for k in range(j, len(self.list_ints)):
+                    if self.list_ints[i] + self.list_ints[j] + self.list_ints[k] == 2020:
+                        print(f"{self.list_ints[i]} and {self.list_ints[j]} and {self.list_ints[k]}")
+                        print(self.list_ints[i] * self.list_ints[j] * self.list_ints[k])
 
 if __name__ == "__main__":
-    print(fuel_required_modules())
+    collector = CoinCollector("data/day1.txt")

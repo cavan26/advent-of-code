@@ -2,7 +2,7 @@ from day2 import IntcodeMachine
 
 class Springdroid:
     def __init__(self):
-        self.computer = IntcodeMachine("data/day21.txt")
+        self.computer = IntcodeMachine("data/2019/day21.txt")
 
     def convert_to_ASCII(self, program):
         ascii_list = []

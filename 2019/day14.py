@@ -93,7 +93,7 @@ class FuelConverter:
 
 
 if __name__ == "__main__":
-    fuel_convertor = FuelConverter("data/day14.txt")
+    fuel_convertor = FuelConverter("../data/2019/day14.txt")
     # Part 1
     print(fuel_convertor.get_fuel())
     # Part 2

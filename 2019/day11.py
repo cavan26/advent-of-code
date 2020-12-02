@@ -3,7 +3,7 @@ from day2 import IntcodeMachine
 
 class PaintingRobot():
     def __init__(self):
-        self.machine = IntcodeMachine("data/day11.txt")
+        self.machine = IntcodeMachine("data/2019/day11.txt")
         self.x = 0
         self.y = 0
         self.direction = ["UP", "LEFT", "DOWN", "RIGHT"]
