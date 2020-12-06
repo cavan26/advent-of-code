@@ -40,7 +40,7 @@ class PassportChecker:
                 continue
             if "#" not in passport["hcl"] and len(passport["hcl"]) != 7:
                 continue
-            if passport["ecl"] not in ["amb", "blu","brn" ,"gry" ,"grn" ,"hzl" ,"oth"]:
+            if passport["ecl"] not in ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"]:
                 continue
             if not passport["pid"].isdigit() or len(passport["pid"]) != 9:
                 continue

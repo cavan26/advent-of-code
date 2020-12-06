@@ -20,11 +20,11 @@ class Amplifier():
 
     @staticmethod
     def get_output(input) -> list[int]:
-        machine = IntcodeMachine("data/2019/day7.txt")
+        machine = IntcodeMachine("data/archive/day7.txt")
         return machine.add_input(input)
 
     def create_amplifier(self,  input) -> list[int]:
-        self.amplifiers.append(IntcodeMachine("data/2019/day7.txt"))
+        self.amplifiers.append(IntcodeMachine("data/archive/day7.txt"))
         return self.amplifiers[-1].add_input(input)
 
     def create_amplifiers(self) -> list[int]:

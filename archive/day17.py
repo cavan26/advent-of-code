@@ -7,7 +7,7 @@ ROTATION_MAP = {"N": 0, "E": 1, "S": 2, "W": 3}
 
 class ScaffoldReader:
     def __init__(self):
-        self.camera = IntcodeMachine("data/2019/day17.txt")
+        self.camera = IntcodeMachine("data/archive/day17.txt")
         self.coord = {}
         self.max_x = 0
         self.max_y = 0

@@ -1,4 +1,6 @@
-from day2 import IntcodeMachine
+import sys
+sys.path.insert(0, "/Users/camillevanassel/git/advent-of-code")
+from archive.day2 import IntcodeMachine
 
 
 class PaintingRobot():

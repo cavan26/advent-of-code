@@ -16,7 +16,7 @@ class TractorBeam:
         for y in range(self.min_y, self.max_y):
             i = 0
             while limit_x_min + i < limit_x_max:
-                beam = IntcodeMachine("data/2019/day19.txt")
+                beam = IntcodeMachine("data/archive/day19.txt")
                 output = beam.add_input([limit_x_min + i, y])
                 if output[0] == 1:
                     self.map[limit_x_min + i, y] = 1
@@ -26,7 +26,7 @@ class TractorBeam:
                     i += 1
             i = 0
             while limit_x_max + i < self.max_x:
-                beam = IntcodeMachine("data/2019/day19.txt")
+                beam = IntcodeMachine("data/archive/day19.txt")
                 output = beam.add_input([limit_x_max + i, y])
                 if output[0] == 1:
                     self.map[limit_x_max + i, y] = 1
@@ -43,7 +43,7 @@ class TractorBeam:
         limit_x_min = None
         limit_x_max = None
         for x in range(self.min_x, self.max_x):
-            beam = IntcodeMachine("data/2019/day19.txt")
+            beam = IntcodeMachine("data/archive/day19.txt")
             output = beam.add_input([x, y])
             if output[0] == 1 and limit_x_min is None:
                 limit_x_min = x
@@ -59,7 +59,7 @@ class TractorBeam:
         return False
 
     def is_attracted(self, x, y):
-        beam = IntcodeMachine("data/2019/day19.txt")
+        beam = IntcodeMachine("data/archive/day19.txt")
         output = beam.add_input([x, y])
         if output[0] == 0:
             return False

@@ -1,8 +1,10 @@
-from day2 import IntcodeMachine
+import sys
+sys.path.insert(0, "/Users/camillevanassel/git/advent-of-code")
+from archive.day2 import IntcodeMachine
 
 class Droid:
     def __init__(self):
-        self.intcode_machine = IntcodeMachine("data/2019/day25.txt")
+        self.intcode_machine = IntcodeMachine("data/archive/day25.txt")
 
     def move(self):
         while True:

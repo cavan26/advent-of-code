@@ -19,7 +19,7 @@ def fuel_required_extended(mass: int) -> int:
 
 def fuel_required_modules() -> int:
     sum_fuel = 0
-    f = open("2019-day1/input.txt", "r")
+    f = open("archive-day1/input.txt", "r")
     for module in f:
         sum_fuel += fuel_required_extended(int(module))
     return sum_fuel
