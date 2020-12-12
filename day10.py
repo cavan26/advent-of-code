@@ -4,7 +4,6 @@ class JoltDifference:
         self.jolts = []
         self.read_file(file)
         self.memoiz = {}
-        self.outlets = {}
 
     def read_file(self, file):
         file1 = open(file, 'r')
