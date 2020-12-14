@@ -45,7 +45,7 @@ class Bus:
 
     @staticmethod
     def modulo(n, m):
-        return ((n % m) + m) % m;
+        return ((n % m) + m) % m
 
     @staticmethod
     def modular_inverse(x, p):
