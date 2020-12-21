@@ -1,5 +1,6 @@
 from collections import defaultdict
 
+
 class TicketChecker:
     def __init__(self, file):
         self.ticket = []
