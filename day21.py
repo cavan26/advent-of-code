@@ -1,6 +1,6 @@
-
 from collections import defaultdict, OrderedDict
 from functools import reduce
+
 
 class Allergens:
     def __init__(self, file):
